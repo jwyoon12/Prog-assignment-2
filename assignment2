@@ -1,0 +1,48 @@
+CacheMatrix <- function( c = matrix() ) {
+    
+    ##Make the inverse
+    i <- NULL
+    
+    ##Function to set the matrix
+    setMatrix <- function( matrix ) {
+        c <<- matrix
+        i <<- NULL
+    }
+    
+    ##Get the matrix
+    getMatrix <- function() {
+        c
+    }
+    
+    ##Set the inverse of the matrix
+    setInverse <- function(inverse) {
+        i <<- inverse
+    }
+    
+    ##Get the inverse of matrix
+    getInverse <- function() {
+       ##Return the inverse property
+        i
+    }
+   
+CacheSolve <- function(x, ...) {
+  
+  ##Return a matrix  
+    c <- x$getInverse()
+  ##Return the inverse if its already set
+    if( !is.null(c) ) {
+        return(c)
+    }
+    
+  ##Get the matrix from our object
+    data <- x$getMatrix()
+    
+  ##Calculate the inverse  
+    c <- solve(data) %*% data  
+    
+  ##Set the inverse  
+    x$setInverse(c) 
+    
+  ##Return the Matrix
+    c 
+}
